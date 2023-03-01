@@ -55,6 +55,7 @@ func main() {
 
 	uploadUri = strings.Replace(uploadUri, "http://127.0.0.1:9000", "https://minio.docker.localhost", 1)
 
+	fmt.Println("uploadUri", uploadUri)
 	request, err := http.NewRequest(http.MethodPut, uploadUri, bytes.NewReader([]byte(content)))
 	if err != nil {
 		panic(err)
@@ -86,6 +87,8 @@ func main() {
 	downloadUri, err := req.Presign(60 * time.Minute)
 
 	downloadUri = strings.Replace(downloadUri, "http://127.0.0.1:9000", "https://minio.docker.localhost", 1)
+
+	fmt.Println("downloadUri", downloadUri)
 
 	request, err = http.NewRequest(http.MethodGet, downloadUri, nil)
 	if err != nil {
